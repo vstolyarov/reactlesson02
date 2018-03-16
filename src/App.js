@@ -18,13 +18,19 @@ class App extends Component {
       name: ['DOGGY', 'CAT', 'HORSE', 'RABBIT', 'GOAT', 'SHEEP'],
       age: 1,
       life: 5,
-      animal: ''
+      animal: '',
+      changeOnce: true
     };
   }
 
   dice = () => {
-    let result = Math.floor(Math.random() * 6);
-    this.setState({ animal: this.state.name[result]})
+    if (this.state.changeOnce) {
+      this.setState({name: ['DOGGY', 'CAT', 'HORSE', 'RABBIT', 'GOAT', 'SHEEP'], age: 1, life: 5, animal: ''})
+      let result = Math.floor(Math.random() * 6);
+      this.setState({ animal: this.state.name[result]});
+      this.setState({changeOnce: false})
+    }
+  
   }
 
   changePet = (event) =>
@@ -61,10 +67,19 @@ class App extends Component {
   increaseAge = () => {
     let currentAge = this.state.age
     let updatedAge = currentAge + 1
-    setTimeout(
-      function () {
-        this.setState({ age: updatedAge });
-      }.bind(this), 2000);
+    if (this.state.age<10) {
+      alert('pet living well')
+      setTimeout(
+        function () {
+          this.setState({ age: updatedAge });
+        }.bind(this), 2000);
+    }
+    else if (this.state.age==10) {
+      alert('your pet has died choose another')
+      this.setState({ changeOnce: true })
+    }
+    
+
   }
 
   render() {
@@ -86,15 +101,15 @@ class App extends Component {
           <RaisedButton onClick={this.increaseLife} label="+Life" style={style} />
           <RaisedButton onClick={this.decreaseLife} label="-Life" style={style} />
           <RaisedButton onClick={this.increaseAge} label="Age+ 2sec after click" style={style} />
-          <RaisedButton onClick={this.dice} label="Choose Pet" style={style} />
+          <RaisedButton onClick={this.dice} label="Choose Pet (Allowed only once)" style={style} />
           <div>
             <br />
             <TextField
-              hintText="Input your name here" style={style} onChange={this.changePet}
+              hintText="Type of Pet:" style={style} onChange={this.changePet}
             /><br />
             <br />
             <TextField
-              hintText="Input your pet's Name"
+              hintText="Input your Name"
               floatingLabelText="Character Name" style={style}
             /><br />
           </div>
