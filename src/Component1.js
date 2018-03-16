@@ -1,10 +1,20 @@
 import React from 'react';
 
 
+
 let Component1 = (props) => {
+    const user= {
+        firstName: 'Joe',
+        lastName: 'Doe'
+    }
     
+    function formatName(user) {
+        return user.firstName + ' ' + user.lastName;
+    }
+
+
     function handleOnClick() {
-        console.log('childrens ' + props.name)
+        alert(formatName(user))
     }
 
         return (
