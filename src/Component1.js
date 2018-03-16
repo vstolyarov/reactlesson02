@@ -18,8 +18,8 @@ let Component1 = (props) => {
     }
 
         return (
-            <button className="button1" onClick={handleOnClick}>
-            Click me to see alert, You are a: {props.name}
+            <button onClick={handleOnClick}>
+            You are a: {props.name}
             </button>
         );
 }

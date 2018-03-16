@@ -37,7 +37,7 @@ class App extends Component {
   {
     const target=event.target;
     for (let i =0; i<this.state.name.length; i++) {
-      if (target.value==this.state.name[i]) {
+      if (target.value===this.state.name[i]) {
         console.log(target.value)
         return this.setState({ animal: this.state.name[i]})
       }
@@ -85,7 +85,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Component1 name={this.state.name} onClicked={this.showLife1} />
+        <Component1 name={this.state.name}/>
 
         <Component2 age={this.state.age} />
 
