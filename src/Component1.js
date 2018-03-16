@@ -12,15 +12,13 @@ let Component1 = (props) => {
         return user.firstName + ' ' + user.lastName;
     }
 
-
-    function handleOnClick() {
-        alert(formatName(user))
-    }
-
         return (
-            <button onClick={handleOnClick}>
-            You are a: {props.name}
+            <div>
+            <button onClick={props.newpet}>
+           New PET: 
             </button>
+            {props.name}
+            </div>
         );
 }
 export default Component1;

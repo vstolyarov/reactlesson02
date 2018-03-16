@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import Component1 from './Component1';
 import Component2 from './Component2';
 import Component3 from './Component3';
-import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 const style = {
   margin: 12,
@@ -25,25 +26,28 @@ class App extends Component {
 
   dice = () => {
     if (this.state.changeOnce) {
-      this.setState({name: ['DOGGY', 'CAT', 'HORSE', 'RABBIT', 'GOAT', 'SHEEP'], age: 1, life: 5, animal: ''})
+      this.setState({ name: ['DOGGY', 'CAT', 'HORSE', 'RABBIT', 'GOAT', 'SHEEP'], age: 1, life: 5, animal: '' })
       let result = Math.floor(Math.random() * 6);
-      this.setState({ animal: this.state.name[result]});
-      this.setState({changeOnce: false})
+      this.setState({ animal: this.state.name[result] });
+      this.setState({ changeOnce: false })
     }
-  
+
   }
 
-  changePet = (event) =>
-  {
-    const target=event.target;
-    for (let i =0; i<this.state.name.length; i++) {
-      if (target.value===this.state.name[i]) {
+  handleClick = () => {
+    console.log('Click happened');
+  }
+
+  changePet = (event) => {
+    const target = event.target;
+    for (let i = 0; i < this.state.name.length; i++) {
+      if (target.value.toUpperCase() === this.state.name[i]) {
         console.log(target.value)
-        return this.setState({ animal: this.state.name[i]})
+        return this.setState({ animal: this.state.name[i] })
       }
     }
-   
-    
+
+
   }
 
   displayLife = () => {
@@ -67,25 +71,24 @@ class App extends Component {
   increaseAge = () => {
     let currentAge = this.state.age
     let updatedAge = currentAge + 1
-    if (this.state.age<10) {
+    if (this.state.age < 10) {
       alert('pet living well')
-      setTimeout(
-        function () {
-          this.setState({ age: updatedAge });
-        }.bind(this), 2000);
+      setTimeout(() => {
+        this.setState({ age: updatedAge });
+      }, 2000);
     }
-    else if (this.state.age==10) {
+    else if (this.state.age == 10) {
       alert('your pet has died choose another')
       this.setState({ changeOnce: true })
     }
-    
+
 
   }
 
   render() {
     return (
       <div className="App">
-        <Component1 name={this.state.name}/>
+        <Component1 name={this.state.name} newpet={this.dice} />
 
         <Component2 age={this.state.age} />
 
@@ -112,12 +115,32 @@ class App extends Component {
               hintText="Input your Name"
               floatingLabelText="Character Name" style={style}
             /><br />
+            <TextField
+              hintText="username:" type="text" style={style} onChange={this.changePet}
+            /><br />
+            <TextField
+              hintText="password:" type="password" style={style} onChange={this.changePet}
+            /><br />
+            <FlatButton label="Login" hoverColor='rgb(156,204,101)' />
+
           </div>
-        
         </MuiThemeProvider>
-        </div>
-        );
-      }
-      }
-      
-      export default App;
+
+        <Router>
+          <div>
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/App">App Home</Link></li>
+              <li><Link to="/App">App Home 2</Link></li>
+
+            </ul>
+            <Route path="/App" exact render={() => <h1>App Home</h1>} />
+            <Route path="/App" exact render={() => <h1>App Home 2</h1>} />
+          </div>
+        </Router>
+      </div>
+    );
+  }
+}
+
+export default App;
