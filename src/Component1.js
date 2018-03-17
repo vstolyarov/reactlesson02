@@ -1,24 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
+//import App from './App';
+
+class Component1 extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            actors: []
+        };
+
+        
+}  
+
+componentDidMount() {
+fetch('http://www.omdbapi.com/?i=tt3896198&apikey=c9778c63')
+.then(response=> response.json())
+.then(myJson=> {
+  let actors= myJson["Actors"]
+  this.setState({actors});
+  console.log(this.state.actors);
+});
+}
 
 
 
-let Component1 = (props) => {
+
+
+render() {
+    
     const user= {
         firstName: 'Joe',
         lastName: 'Doe'
     }
-    
-    function formatName(user) {
-        return user.firstName + ' ' + user.lastName;
-    }
 
-        return (
+   
+    
+    return (
             <div>
-            <button onClick={props.newpet}>
-           New PET: 
-            </button>
-            {props.name}
+{this.state.actors}
+<button onClick={this.props.newpet}>NEW PET</button>
             </div>
         );
+}
 }
 export default Component1;
