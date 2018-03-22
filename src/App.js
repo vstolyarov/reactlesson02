@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Component1 from './Component1';
 import Component2 from './Component2';
 import Component3 from './Component3';
+import Search from './Search';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -92,6 +93,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <Search/>
         <Component1 name={this.state.name} newpet={this.dice} />
 
         <Component2 age={this.state.age} />

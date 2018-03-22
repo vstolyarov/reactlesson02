@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 //import App from './App';
 
 class Component1 extends Component {
@@ -16,8 +17,8 @@ componentDidMount() {
 fetch('http://www.omdbapi.com/?i=tt3896198&apikey=c9778c63')
 .then( response => response.json() )
 .then(data=> { 
-this.setState({actors: data.Actors});
-console.log("state", this.state.actors);
+  this.setState({actors: data.Actors});
+  console.log("state", this.state.actors);
 })
 
   }
@@ -29,9 +30,11 @@ console.log("state", this.state.actors);
 
 render() {  
   
-    return (
-            <div>
-            {this.state.actors}
+  
+   return (
+<div>
+    
+{this.state.actors}
 <button onClick={this.props.newpet}>NEW PET</button>
  
  </div>
