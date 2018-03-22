@@ -4,8 +4,9 @@ import React, { Component } from 'react';
 class Component1 extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            actors: []
+        this.state = { actors: []
+         //   actors: [],
+         //   images: []
         };
 
         
@@ -13,32 +14,28 @@ class Component1 extends Component {
 
 componentDidMount() {
 fetch('http://www.omdbapi.com/?i=tt3896198&apikey=c9778c63')
-.then(response=> response.json())
-.then(myJson=> {
-  let actors= myJson["Actors"]
-  this.setState({actors});
-  console.log(this.state.actors);
-});
-}
+.then( response => response.json() )
+.then(data=> { 
+this.setState({actors: data.Actors});
+console.log("state", this.state.actors);
+})
+
+  }
 
 
 
 
 
-render() {
-    
-    const user= {
-        firstName: 'Joe',
-        lastName: 'Doe'
-    }
 
-   
-    
+render() {  
+  
     return (
             <div>
-{this.state.actors}
+            {this.state.actors}
 <button onClick={this.props.newpet}>NEW PET</button>
-            </div>
+ 
+ </div>
+
         );
 }
 }

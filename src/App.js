@@ -6,7 +6,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import DialogExampleSimple from './dialog';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const style = {
   margin: 12,
@@ -51,6 +52,7 @@ class App extends Component {
   }
 
   displayLife = () => {
+
     console.log('life');
     alert('this dog has ' + this.state.life + ' life left');
   }
@@ -60,6 +62,7 @@ class App extends Component {
     //current life 5
     let updatedlife = currentlife + 1;
     this.setState({ life: updatedlife })
+    
   }
 
   decreaseLife = () => {
@@ -70,6 +73,7 @@ class App extends Component {
 
   increaseAge = () => {
     let currentAge = this.state.age
+    
     let updatedAge = currentAge + 1
     if (this.state.age < 10) {
       alert('pet living well')
@@ -77,7 +81,7 @@ class App extends Component {
         this.setState({ age: updatedAge });
       }, 2000);
     }
-    else if (this.state.age == 10) {
+    else if (this.state.age === 10) {
       alert('your pet has died choose another')
       this.setState({ changeOnce: true })
     }
@@ -100,11 +104,15 @@ class App extends Component {
         <h2>Your pet has: {this.state.life} life left</h2>
 
         <MuiThemeProvider>
+          <div>
           <RaisedButton onClick={this.displayLife} label="Show Life" style={style} />
           <RaisedButton onClick={this.increaseLife} label="+Life" style={style} />
           <RaisedButton onClick={this.decreaseLife} label="-Life" style={style} />
           <RaisedButton onClick={this.increaseAge} label="Age+ 2sec after click" style={style} />
           <RaisedButton onClick={this.dice} label="Choose Pet (Allowed only once)" style={style} />
+          
+          <DialogExampleSimple style={style} />
+          </div>
           <div>
             <br />
             <TextField

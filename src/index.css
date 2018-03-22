@@ -8,3 +8,10 @@ body {
 .button1 {
   background-color: red;
 }
+
+img {
+  float: left;
+  padding: 5px;
+  border: 5px solid black;
+  margin-right: 5px;
+}

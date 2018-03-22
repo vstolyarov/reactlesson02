@@ -5,9 +5,9 @@ let Component2 = (props) => {
         alert(props.age)
     }
         return (
-            <button onClick={activateSmart2}>
-                <h1>Click to increase Life, age:{props.age}</h1>
-            </button>
+            <p1>
+                <h1>Component 2 rendered props.age {props.age}</h1>
+            </p1>
         );
 }
 export default Component2;
