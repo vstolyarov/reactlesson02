@@ -22,8 +22,25 @@ class App extends Component {
       age: 1,
       life: 5,
       animal: '',
-      changeOnce: true
+      changeOnce: true,
+      showComments: false
     };
+  }
+
+  getComments = () => {
+    console.log('getting comments')
+    const comments= [
+      {id:1, author: 'M Mc', body: 'Great' },
+      {id:2, author: 'B Ben', body: 'Excellent'},
+      {id:3, author: 'C Sam', body: 'Ok'}
+    ];
+  }
+
+  handleClick = () => {
+    this.setState({
+      showComments: !this.state.showComments
+    });
+    console.log(this.state.showComments)
   }
 
   dice = () => {
@@ -33,11 +50,6 @@ class App extends Component {
       this.setState({ animal: this.state.name[result] });
       this.setState({ changeOnce: false })
     }
-
-  }
-
-  handleClick = () => {
-    console.log('Click happened');
   }
 
   changePet = (event) => {
@@ -48,8 +60,6 @@ class App extends Component {
         return this.setState({ animal: this.state.name[i] })
       }
     }
-
-
   }
 
   displayLife = () => {
@@ -86,21 +96,36 @@ class App extends Component {
       alert('your pet has died choose another')
       this.setState({ changeOnce: true })
     }
-
-
   }
 
   render() {
+    const comments= [
+      {id:1, author: 'M Mc', body: 'Great' },
+      {id:2, author: 'B Ben', body: 'Excellent'},
+      {id:3, author: 'C Sam', body: 'Ok'}
+    ];
+    let persons=null;
+    if (this.state.showComments) {
+      persons=(
+        <div className="comment-box">
+          {comments.map(person=> {
+            return <h2>Author name: '{person.author}' Comment: {person.body}</h2>
+          })}
+        </div>
+      )
+    }
+    
     return (
       <div className="App">
-      <Search/>
+      <h1>Comments Box:</h1>
+      {persons}
         <Component1 name={this.state.name} newpet={this.dice} />
 
         <Component2 age={this.state.age} />
 
         <Component3 life={this.state.life} />
 
-
+        
         <h2>Your pet is called: {this.state.animal}</h2>
         <h2>Your pet is: {this.state.age} years old</h2>
         <h2>Your pet has: {this.state.life} life left</h2>
@@ -112,6 +137,8 @@ class App extends Component {
           <RaisedButton onClick={this.decreaseLife} label="-Life" style={style} />
           <RaisedButton onClick={this.increaseAge} label="Age+ 2sec after click" style={style} />
           <RaisedButton onClick={this.dice} label="Choose Pet (Allowed only once)" style={style} />
+
+          <RaisedButton onClick={this.handleClick} label="Show Comments ON/OFF" style={style} />
           
           <DialogExampleSimple style={style} />
           </div>
@@ -142,10 +169,12 @@ class App extends Component {
               <li><Link to="/">Home</Link></li>
               <li><Link to="/App">App Home</Link></li>
               <li><Link to="/App">App Home 2</Link></li>
+              <li><Link to="/Search">Search Home</Link></li>
 
             </ul>
             <Route path="/App" exact render={() => <h1>App Home</h1>} />
             <Route path="/App" exact render={() => <h1>App Home 2</h1>} />
+            <Route path="/Search" exact render={()=> <Search/>}/>
           </div>
         </Router>
       </div>
