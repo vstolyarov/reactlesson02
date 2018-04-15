@@ -22,15 +22,45 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .button1 {
   background-color: red;
 }
 
-.search {
-  color: midnightblue
+.flex-container {
+  color: midnightblue;
+  display: flex;
+  flex-direction: column;
+  background-color: DodgerBlue;
+  
+}
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  display: flex;
+  margin: 10px;
+  text-align: center;
+  font-size: 26px;
+}
+
+.flex-container img {
+  width: 20%;
+  height: 20%;
+  border-radius: 2%;
+}
+
+.show-card {
+  color: rgb(55, 3, 104);
+  margin: auto;
+  border: 1px solid black;
+
+  box-shadow: 0 2px 3px grey;
+  padding: 16px;
+  text-align: center;
+
+}
+
+.show-card > div {
+  width: 100%;
+  height: auto;
+  
 }

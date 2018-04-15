@@ -21,18 +21,11 @@ fetch('http://www.omdbapi.com/?i=tt3896198&apikey=c9778c63')
 })
 
   }
-
-
-
-
-
-
+//EX try fetching local sample.json
 render() {  
-  
-  
    return (
 <div>
-    
+
 {this.state.actors}
 <button onClick={this.props.newpet}>NEW PET</button>
  

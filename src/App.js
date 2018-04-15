@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import Component1 from './Component1';
 import Component2 from './Component2';
 import Component3 from './Component3';
+import Component4 from './Component4';
 import Search from './Search';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
+import {List, ListItem} from 'material-ui/List'
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import DialogExampleSimple from './dialog';
@@ -29,7 +31,7 @@ class App extends Component {
 
   getComments = () => {
     console.log('getting comments')
-    const comments= [
+    return [
       {id:1, author: 'M Mc', body: 'Great' },
       {id:2, author: 'B Ben', body: 'Excellent'},
       {id:3, author: 'C Sam', body: 'Ok'}
@@ -98,27 +100,29 @@ class App extends Component {
     }
   }
 
+ 
+
   render() {
-    const comments= [
-      {id:1, author: 'M Mc', body: 'Great' },
-      {id:2, author: 'B Ben', body: 'Excellent'},
-      {id:3, author: 'C Sam', body: 'Ok'}
-    ];
+    
+    let comments2=this.getComments()
+    
     let persons=null;
     if (this.state.showComments) {
       persons=(
-        <div className="comment-box">
-          {comments.map(person=> {
-            return <h2>Author name: '{person.author}' Comment: {person.body}</h2>
-          })}
-        </div>
+          comments2.map(person=> {
+            return <Component4
+            id={person.id} 
+            name={person.author} 
+            body={person.body} />
+          })
       )
     }
-    
+   
     return (
       <div className="App">
       <h1>Comments Box:</h1>
-      {persons}
+      
+     
         <Component1 name={this.state.name} newpet={this.dice} />
 
         <Component2 age={this.state.age} />
@@ -132,6 +136,7 @@ class App extends Component {
 
         <MuiThemeProvider>
           <div>
+          <ListItem primaryText={persons}></ListItem>
           <RaisedButton onClick={this.displayLife} label="Show Life" style={style} />
           <RaisedButton onClick={this.increaseLife} label="+Life" style={style} />
           <RaisedButton onClick={this.decreaseLife} label="-Life" style={style} />
